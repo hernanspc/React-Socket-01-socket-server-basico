@@ -13,10 +13,10 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
 
-    socket.emit("mensaje-bienvenida", {
-        msg: 'Bienvenida al server',
-        fecha: new Date()
-    });
+    // socket.emit("mensaje-bienvenida", {
+    //     msg: 'Bienvenida al server',
+    //     fecha: new Date()
+    // });
 
     //Escuchar everto
     socket.on('mensaje-cliente', (data) => {
