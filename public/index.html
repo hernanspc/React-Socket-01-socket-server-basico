@@ -33,9 +33,7 @@
 
     <div class="row">
         <div class="col">
-            <ul id="misMensajes" class="mt-2">
-                <li>Hol</li>
-            </ul>
+            <ul id="misMensajes" class="mt-2"></ul>
         </div>
     </div>
 
@@ -43,26 +41,27 @@
         integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-
     <script>
         const socket = io('http://localhost:8080');
 
         //Referencias a elementos del DOM
         const formulario = document.querySelector('#miFormulario');
         const mensajes = document.querySelector('#misMensajes');
+        const txtMensaje = document.querySelector('#txtMensaje');
 
+        formulario.addEventListener('submit', (ev) => {
+            ev.preventDefault();
 
-        socket.on('mensaje-bienvenida', (data) => {
-            console.log('el server emitio algo', data)
+            const nuevoMensaje = txtMensaje.value;
+
+            socket.emit('mensaje-to-server', { texto: nuevoMensaje });
+        })
+
+        socket.on('mensaje-from-server', (data) => {
+
+            mensajes.innerHTML += `<li>${data.texto}</li>`
+
         });
-
-        // setTimeout(() => {
-        //     socket.emit('mensaje-cliente', {
-        //         msg: 'cliente',
-        //         nombre: 'Hernan'
-        //     })
-        // }, 2000)
 
     </script>
 
