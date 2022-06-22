@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     socket.on('mensaje-to-server', (data) => {
         console.log('data : ', data)
 
-        socket.emit('mensaje-from-server', data)
+        io.emit('mensaje-from-server', data)
     });
 
 });
