@@ -11,12 +11,18 @@ const io = require('socket.io')(server);
 //desplegar directorio publico
 app.use(express.static(__dirname + '/public'));
 
-io.on('connection', ( socket ) => { 
-    // console.log('cliente conectado! ', socket.id);
+io.on('connection', (socket) => {
+
     socket.emit("mensaje-bienvenida", {
         msg: 'Bienvenida al server',
         fecha: new Date()
-    })
+    });
+
+    //Escuchar everto
+    socket.on('mensaje-cliente', (data) => {
+        console.log('data : ', data)
+    });
+
 });
 
 server.listen(8080, () => {

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minichat</title>
 </head>
+
 <body>
     <h1>Minichat</h1>
 
@@ -16,13 +18,21 @@
 
 
     <script>
-        const socket =  io('http://localhost:8080');
+        const socket = io('http://localhost:8080');
 
-        socket.on('mensaje-bienvenida', (data )=>{
-            console.log('el server emitio algo',data)
+        socket.on('mensaje-bienvenida', (data) => {
+            console.log('el server emitio algo', data)
         });
 
+        setTimeout(() => {
+            socket.emit('mensaje-cliente', {
+                msg: 'cliente',
+                nombre: 'Hernan'
+            })
+        }, 2000)
+
     </script>
-    
+
 </body>
+
 </html>
